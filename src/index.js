@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './app';
+
 import './bootstrap.min.css';
 import {createStore, bindActionCreators} from 'redux';
 import * as actions from './actions'
@@ -13,21 +17,22 @@ const {
   rndInc: rndIncDispatch,
 } = bindActionCreators(actions, dispatch)
 
-document.getElementById(`dec`)
-  .addEventListener(`click`, decDispatch);
-
-document.getElementById(`inc`)
-  .addEventListener(`click`, incDispatch);
-
-document.getElementById(`rnd-dec`)
-  .addEventListener(`click`, () => rndDecDispatch(Math.floor(Math.random() * 11)));
-
-document.getElementById(`rnd-inc`)
-  .addEventListener(`click`, () => rndIncDispatch(Math.floor(Math.random() * 11)));
 
 const update = () => {
-  document.getElementById(`counter`)
-  .textContent = getState();
+  ReactDOM.render(
+    <App counter={getState()} 
+        decDispatch={decDispatch}
+        incDispatch={incDispatch}
+        rndDecDispatch={() => {
+          const value = Math.floor(Math.random() * 11);
+          rndDecDispatch(value);
+        }}
+        rndIncDispatch={() => {
+          const value = Math.floor(Math.random() * 11);
+          rndIncDispatch(value);
+        }} />,
+    document.getElementById(`root`));
 };
 
+update();
 store.subscribe(update);
