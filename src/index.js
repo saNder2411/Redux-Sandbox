@@ -1,22 +1,17 @@
 import './bootstrap.min.css';
 import {createStore, bindActionCreators} from 'redux';
-import {dec, inc, rndDec, rndInc} from './actions'
+import * as actions from './actions'
 import reducer from './reducer';
 
 const store = createStore(reducer);
 const {dispatch, getState} = store;
 
-const bindActionCreator = (actionCreator, dispatch) => (...args) => {
-  dispatch(actionCreator(...args));
-};
-
-const decDispatch = bindActionCreators(dec, dispatch);
-const incDispatch = bindActionCreator(inc, dispatch);
-
-const {rndDecDispatch, rndIncDispatch} = bindActionCreators({
-  rndDecDispatch: rndDec,
-  rndIncDispatch: rndInc,
-}, dispatch)
+const {
+  dec: decDispatch,
+  inc: incDispatch,
+  rndDec: rndDecDispatch,
+  rndInc: rndIncDispatch,
+} = bindActionCreators(actions, dispatch)
 
 document.getElementById(`dec`)
   .addEventListener(`click`, decDispatch);
