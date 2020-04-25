@@ -1,10 +1,13 @@
 import React from 'react';
-import './app.css'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
+import './counter.css'
 
-const App = ({counter, decDispatch, incDispatch, rndDecDispatch, rndIncDispatch}) => {
+const Counter = ({counter, decDispatch, incDispatch, rndDecDispatch, rndIncDispatch}) => {
 
   return (
-    <div className="app jumbotron">
+    <div className="counter jumbotron">
       <h2 id="counter">{counter}</h2>
       <ul className="list-group">
         <li className="list-group-item d-flex bg-light">
@@ -36,4 +39,25 @@ const App = ({counter, decDispatch, incDispatch, rndDecDispatch, rndIncDispatch}
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({counter: state});
+
+const mapDispatchToProps = (dispatch) => {
+  const {dec, inc, rndDec, rndInc} = bindActionCreators(actions, dispatch);
+
+  return {
+    decDispatch: dec,
+    incDispatch: inc,
+    rndDecDispatch: () => {
+      const rndValue = Math.floor(Math.random() * 11);
+
+      rndDec(rndValue);
+    },
+    rndIncDispatch: () => {
+      const rndValue = Math.floor(Math.random() * 11);
+
+      rndInc(rndValue);
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
