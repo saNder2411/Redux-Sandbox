@@ -1,41 +1,21 @@
 import './bootstrap.min.css';
 import {createStore} from 'redux';
-
-const initialState = 0;
-
-const reducer = (state = initialState, action) => {
-
-  switch (action.type) {
-    case `DEC`:
-      return --state;
-
-    case `INC`:
-      return ++state;
-
-    case `RND_DEC`:
-      return state - action.payload;
-
-    case `RND_INC`:
-      return state + action.payload;
-
-    default:
-      return state;
-  }
-};
+import {dec, inc, rndDec, rndInc} from './actions'
+import reducer from './reducer';
 
 const store = createStore(reducer);
 
 document.getElementById(`dec`)
-  .addEventListener(`click`, () => store.dispatch({type: `DEC`}));
+  .addEventListener(`click`, () => store.dispatch(dec()));
 
 document.getElementById(`inc`)
-  .addEventListener(`click`, () => store.dispatch({type: `INC`}));
+  .addEventListener(`click`, () => store.dispatch(inc()));
 
 document.getElementById(`rnd-dec`)
-  .addEventListener(`click`, () => store.dispatch({type: `RND_DEC`, payload: Math.floor(Math.random() * 10)}));
+  .addEventListener(`click`, () => store.dispatch(rndDec(Math.floor(Math.random() * 11))));
 
 document.getElementById(`rnd-inc`)
-  .addEventListener(`click`, () => store.dispatch({type: `RND_INC`, payload: Math.floor(Math.random() * 10)}));
+  .addEventListener(`click`, () => store.dispatch(rndInc(Math.floor(Math.random() * 11))));
 
 const update = () => {
   document.getElementById(`counter`)
