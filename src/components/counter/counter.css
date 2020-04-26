@@ -1,12 +1,12 @@
-.counter {
-  width: 50%;
+.counter h2 {
+  padding: .5rem;
+  background-color: #F9F8FC;
 }
 
-.counter h2 {
-  outline: 2px solid #17141F;
-  padding: .2rem;
+.counter .list-group-item {
+  justify-content: space-between;
 }
 
 .counter .btn {
-  margin-right: auto;
+  width: 48%;
 }

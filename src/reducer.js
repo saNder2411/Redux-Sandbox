@@ -1,4 +1,4 @@
-const initialState = 15;
+const initialState = 0;
 
 const reducer = (state = initialState, action) => {
 

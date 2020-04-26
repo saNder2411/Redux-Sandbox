@@ -2,6 +2,12 @@ export const dec = () => ({type: `DEC`});
 
 export const inc = () => ({type: `INC`});
 
-export const rndDec = (payload) => ({type: `RND_DEC`, payload});
+export const rndDec = () => ({
+  type: `RND_DEC`,
+  payload: Math.floor(Math.random() * 11),
+});
 
-export const rndInc = (payload) => ({type: `RND_INC`, payload});
+export const rndInc = () => ({
+  type: `RND_INC`,
+  payload: Math.floor(Math.random() * 11),
+});

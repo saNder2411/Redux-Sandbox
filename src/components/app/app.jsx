@@ -4,7 +4,11 @@ import './app.css';
 
 const App = () => {
 
-  return <Counter />
+  return (
+    <div className="app">
+      <Counter />
+    </div>
+  );
 };
 
 export default App;

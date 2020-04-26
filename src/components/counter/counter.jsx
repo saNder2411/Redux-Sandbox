@@ -1,36 +1,35 @@
 import React from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 import './counter.css'
 
-const Counter = ({counter, decDispatch, incDispatch, rndDecDispatch, rndIncDispatch}) => {
+const Counter = ({counter, dec, inc, rndDec, rndInc}) => {
 
   return (
-    <div className="counter jumbotron">
+    <div className="counter jumbotron bg-secondary">
       <h2 id="counter">{counter}</h2>
       <ul className="list-group">
         <li className="list-group-item d-flex bg-light">
           <button id="dec"
                   className="btn btn-primary btn-lg"
-                  onClick={decDispatch}>
+                  onClick={dec}>
             DEC -
           </button>
           <button id="inc"
                   className="btn btn-primary btn-lg"
-                  onClick={incDispatch}>
+                  onClick={inc}>
             INC +
           </button>
         </li>
         <li className="list-group-item d-flex bg-light">
           <button id="rnd-dec"
                   className="btn btn-primary btn-lg"
-                  onClick={rndDecDispatch}>
+                  onClick={rndDec}>
             RND DEC -
           </button>
           <button id="rnd-inc"
                   className="btn btn-primary btn-lg"
-                  onClick={rndIncDispatch}>
+                  onClick={rndInc}>
             RND INC +
           </button>
         </li>
@@ -41,23 +40,4 @@ const Counter = ({counter, decDispatch, incDispatch, rndDecDispatch, rndIncDispa
 
 const mapStateToProps = (state) => ({counter: state});
 
-const mapDispatchToProps = (dispatch) => {
-  const {dec, inc, rndDec, rndInc} = bindActionCreators(actions, dispatch);
-
-  return {
-    decDispatch: dec,
-    incDispatch: inc,
-    rndDecDispatch: () => {
-      const rndValue = Math.floor(Math.random() * 11);
-
-      rndDec(rndValue);
-    },
-    rndIncDispatch: () => {
-      const rndValue = Math.floor(Math.random() * 11);
-
-      rndInc(rndValue);
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, actions)(Counter);
